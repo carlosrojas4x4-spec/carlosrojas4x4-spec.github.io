@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CYG Service | Consultoría y Administración Empresarial en Chile</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0f2744;
+    --navy-light: #1a3a5c;
+    --teal: #0e8a7a;
+    --teal-light: #14b8a0;
+    --teal-pale: #e6f7f5;
+    --gold: #e8a020;
+    --gold-light: #fbbf24;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --gray-800: #1e293b;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 4px 24px rgba(15,39,68,0.10);
+    --shadow-lg: 0 12px 48px rgba(15,39,68,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    color: var(--gray-800);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 5%;
+    display: flex; align-items:center; justify-content:space-between;
+    height: 68px;
+  }
+  .logo {
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none;
+  }
+  .logo-icon {
+    width:40px; height:40px; border-radius:10px;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; letter-spacing:-0.5px;
+  }
+  .logo-text { font-size:18px; font-weight:700; color:var(--navy); letter-spacing:-0.3px; }
+  .logo-text span { color:var(--teal); }
+
+  .nav-links { display:flex; gap:28px; list-style:none; align-items:center; }
+  .nav-links a { text-decoration:none; font-size:14px; font-weight:500; color:var(--gray-600); transition:color .2s; }
+  .nav-links a:hover { color:var(--teal); }
+  .nav-cta {
+    background:var(--teal); color:#fff !important;
+    padding:8px 20px; border-radius:50px;
+    transition: background .2s, transform .15s !important;
+  }
+  .nav-cta:hover { background:var(--navy) !important; transform:translateY(-1px); }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 60%, #0d4a40 100%);
+    display:flex; align-items:center;
+    padding: 100px 5% 60px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; top:-10%; right:-5%;
+    width:600px; height:600px;
+    background: radial-gradient(circle, rgba(14,138,122,0.25) 0%, transparent 70%);
+    border-radius:50%;
+  }
+  .hero::after {
+    content:'';
+    position:absolute; bottom:-15%; left:-10%;
+    width:500px; height:500px;
+    background: radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%);
+    border-radius:50%;
+  }
+  .hero-content {
+    max-width:1100px; margin:0 auto; width:100%;
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+    position:relative; z-index:1;
+  }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+    color:rgba(255,255,255,0.85); font-size:13px; font-weight:500;
+    padding:6px 16px; border-radius:50px; margin-bottom:24px;
+  }
+  .hero-badge span { width:6px; height:6px; background:var(--teal-light); border-radius:50%; }
+  .hero h1 {
+    font-family:'Lora',serif;
+    font-size:clamp(2.2rem, 4vw, 3.2rem);
+    font-weight:600; color:#fff; line-height:1.2;
+    margin-bottom:20px;
+  }
+  .hero h1 em { font-style:italic; color:var(--gold-light); }
+  .hero p {
+    font-size:1.05rem; color:rgba(255,255,255,0.75);
+    line-height:1.7; margin-bottom:36px; max-width:440px;
+  }
+  .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-primary {
+    background:var(--teal-light); color:var(--navy);
+    padding:14px 30px; border-radius:50px;
+    font-weight:600; font-size:15px; text-decoration:none;
+    transition: transform .2s, box-shadow .2s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(20,184,160,0.4); }
+  .btn-outline {
+    border:2px solid rgba(255,255,255,0.35); color:#fff;
+    padding:14px 30px; border-radius:50px;
+    font-weight:500; font-size:15px; text-decoration:none;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline:hover { border-color:#fff; background:rgba(255,255,255,0.08); }
+
+  .hero-visual {
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    animation: floatUp 1s ease both 0.3s;
+  }
+  @keyframes floatUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:none} }
+
+  .stat-card {
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.14);
+    backdrop-filter:blur(8px);
+    border-radius:var(--radius); padding:20px;
+    transition:transform .3s;
+  }
+  .stat-card:hover { transform:translateY(-4px); }
+  .stat-card.featured {
+    background:rgba(20,184,160,0.2); border-color:rgba(20,184,160,0.4);
+    grid-column:span 2;
+  }
+  .stat-num { font-size:2rem; font-weight:700; color:#fff; line-height:1; }
+  .stat-num span { font-size:1.1rem; color:var(--teal-light); }
+  .stat-label { font-size:12px; color:rgba(255,255,255,0.6); margin-top:4px; }
+  .stat-icon { font-size:22px; margin-bottom:8px; }
+
+  /* ── SECTION BASE ─────────────────────── */
+  section { padding:90px 5%; }
+  .container { max-width:1100px; margin:0 auto; }
+  .section-tag {
+    display:inline-block; font-size:12px; font-weight:600;
+    color:var(--teal); text-transform:uppercase; letter-spacing:1.5px;
+    margin-bottom:12px;
+  }
+  .section-title {
+    font-family:'Lora',serif;
+    font-size:clamp(1.8rem,3vw,2.5rem);
+    font-weight:600; color:var(--navy); line-height:1.25; margin-bottom:16px;
+  }
+  .section-subtitle {
+    font-size:1rem; color:var(--gray-600);
+    line-height:1.7; max-width:560px;
+  }
+  .section-header { margin-bottom:52px; }
+
+  /* ── SERVICIOS ─────────────────────────── */
+  #servicios { background:var(--gray-50); }
+  .services-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+    gap:20px;
+  }
+  .service-card {
+    background:#fff;
+    border:1px solid var(--gray-200);
+    border-radius:var(--radius); padding:28px;
+    transition:transform .25s, box-shadow .25s, border-color .25s;
+    cursor:default;
+    position:relative; overflow:hidden;
+  }
+  .service-card::before {
+    content:'';
+    position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--teal),var(--teal-light));
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .3s;
+  }
+  .service-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:transparent; }
+  .service-card:hover::before { transform:scaleX(1); }
+
+  .service-icon {
+    width:52px; height:52px; border-radius:14px;
+    background:var(--teal-pale);
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px; margin-bottom:18px;
+  }
+  .service-card h3 { font-size:1.05rem; font-weight:600; color:var(--navy); margin-bottom:8px; }
+  .service-card p { font-size:0.88rem; color:var(--gray-600); line-height:1.65; }
+  .service-tag {
+    display:inline-block; margin-top:14px;
+    font-size:11px; font-weight:600; color:var(--teal);
+    background:var(--teal-pale); padding:4px 12px;
+    border-radius:20px;
+  }
+
+  /* ── PROMO ─────────────────────────────── */
+  #promociones { background:#fff; }
+  .promo-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:22px; margin-top:8px;
+  }
+  .promo-card {
+    border-radius:var(--radius); padding:32px;
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .promo-card.starter {
+    background:var(--gray-50); border:1.5px solid var(--gray-200);
+  }
+  .promo-card.popular {
+    background:linear-gradient(145deg,var(--navy),var(--navy-light));
+    border:none; color:#fff;
+  }
+  .promo-card.premium {
+    background:linear-gradient(145deg,#0a3d35,var(--teal));
+    border:none; color:#fff;
+  }
+  .promo-badge {
+    display:inline-block; font-size:11px; font-weight:700;
+    padding:4px 14px; border-radius:20px; margin-bottom:18px;
+    text-transform:uppercase; letter-spacing:0.8px;
+  }
+  .starter .promo-badge { background:var(--gray-200); color:var(--gray-600); }
+  .popular .promo-badge { background:var(--gold); color:var(--navy); }
+  .premium .promo-badge { background:rgba(255,255,255,0.2); color:#fff; }
+  .promo-name { font-size:1.2rem; font-weight:700; margin-bottom:6px; }
+  .starter .promo-name { color:var(--navy); }
+  .promo-price {
+    font-family:'Lora',serif;
+    font-size:2.4rem; font-weight:600; line-height:1; margin-bottom:4px;
+  }
+  .starter .promo-price { color:var(--navy); }
+  .promo-period { font-size:12px; opacity:0.65; margin-bottom:22px; }
+  .promo-features { list-style:none; flex:1; }
+  .promo-features li {
+    font-size:13px; padding:7px 0;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; gap:10px;
+  }
+  .starter .promo-features li { border-color:var(--gray-200); color:var(--gray-600); }
+  .promo-features li::before { content:'✓'; font-weight:700; color:var(--teal-light); min-width:16px; }
+  .starter .promo-features li::before { color:var(--teal); }
+  .promo-cta {
+    margin-top:24px; padding:13px; border-radius:50px;
+    font-weight:600; font-size:14px; text-align:center;
+    text-decoration:none; display:block;
+    transition:transform .2s, opacity .2s;
+  }
+  .promo-cta:hover { transform:translateY(-2px); opacity:.9; }
+  .starter .promo-cta { background:var(--teal); color:#fff; }
+  .popular .promo-cta { background:var(--gold); color:var(--navy); }
+  .premium .promo-cta { background:rgba(255,255,255,0.15); color:#fff; border:1.5px solid rgba(255,255,255,0.4); }
+  .promo-card.popular .deco {
+    position:absolute; top:-30px; right:-30px;
+    width:120px; height:120px; border-radius:50%;
+    background:rgba(255,255,255,0.05);
+  }
+
+  /* ── POR QUÉ NOSOTROS ─────────────────── */
+  #nosotros { background:var(--gray-50); }
+  .why-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+  }
+  .why-img {
+    border-radius:var(--radius);
+    overflow:hidden; position:relative;
+    aspect-ratio:4/3;
+  }
+  .why-img img { width:100%; height:100%; object-fit:cover; }
+  .why-img-overlay {
+    position:absolute; bottom:20px; left:20px; right:20px;
+    background:rgba(15,39,68,0.88); backdrop-filter:blur(6px);
+    border-radius:var(--radius-sm); padding:16px 20px;
+    display:flex; gap:20px; align-items:center;
+  }
+  .ov-num { font-size:1.8rem; font-weight:700; color:var(--teal-light); }
+  .ov-text { font-size:12px; color:rgba(255,255,255,0.8); line-height:1.4; }
+
+  .why-items { display:flex; flex-direction:column; gap:20px; }
+  .why-item {
+    background:#fff; border:1px solid var(--gray-200);
+    border-radius:var(--radius-sm); padding:20px 22px;
+    display:flex; gap:16px; align-items:flex-start;
+    transition:border-color .2s;
+  }
+  .why-item:hover { border-color:var(--teal); }
+  .why-item-icon {
+    width:44px; height:44px; min-width:44px; border-radius:12px;
+    background:var(--teal-pale); display:flex; align-items:center;
+    justify-content:center; font-size:20px;
+  }
+  .why-item h4 { font-size:0.95rem; font-weight:600; color:var(--navy); margin-bottom:4px; }
+  .why-item p { font-size:0.83rem; color:var(--gray-600); line-height:1.55; }
+
+  /* ── TESTIMONIO ─────────────────────────── */
+  #testimonios { background:linear-gradient(135deg,var(--navy),#0a3d35); padding:80px 5%; }
+  .test-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px; margin-top:48px;
+  }
+  .test-card {
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:var(--radius); padding:28px;
+    transition:transform .25s;
+  }
+  .test-card:hover { transform:translateY(-4px); }
+  .test-stars { color:var(--gold-light); font-size:14px; margin-bottom:14px; }
+  .test-text { font-size:0.9rem; color:rgba(255,255,255,0.8); line-height:1.7; font-style:italic; margin-bottom:20px; }
+  .test-author { display:flex; align-items:center; gap:12px; }
+  .test-avatar {
+    width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:15px; flex-shrink:0;
+  }
+  .test-name { font-size:13px; font-weight:600; color:#fff; }
+  .test-role { font-size:11px; color:rgba(255,255,255,0.5); }
+
+  /* ── CONTACTO ─────────────────────────── */
+  #contacto { background:#fff; }
+  .contact-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:60px; align-items:start; }
+  .contact-info h3 { font-family:'Lora',serif; font-size:1.6rem; font-weight:600; color:var(--navy); margin-bottom:14px; }
+  .contact-info p { font-size:0.92rem; color:var(--gray-600); line-height:1.7; margin-bottom:28px; }
+  .contact-detail {
+    display:flex; gap:14px; align-items:flex-start; margin-bottom:18px;
+  }
+  .contact-detail-icon {
+    width:42px; height:42px; min-width:42px; background:var(--teal-pale);
+    border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px;
+  }
+  .contact-detail h5 { font-size:12px; color:var(--gray-400); font-weight:500; margin-bottom:2px; }
+  .contact-detail p { font-size:14px; color:var(--navy); font-weight:500; margin:0; }
+
+  .contact-form { background:var(--gray-50); border-radius:var(--radius); padding:32px; border:1px solid var(--gray-200); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .form-group label { font-size:12px; font-weight:600; color:var(--gray-600); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding:11px 14px; border:1.5px solid var(--gray-200);
+    border-radius:var(--radius-sm); font-family:'Sora',sans-serif;
+    font-size:14px; color:var(--gray-800); background:#fff;
+    transition:border-color .2s; outline:none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color:var(--teal);
+  }
+  .form-group textarea { resize:vertical; min-height:110px; }
+  .form-submit {
+    width:100%; padding:14px; background:var(--teal);
+    color:#fff; border:none; border-radius:50px;
+    font-family:'Sora',sans-serif; font-weight:600; font-size:15px;
+    cursor:pointer; transition:background .2s, transform .15s;
+  }
+  .form-submit:hover { background:var(--navy); transform:translateY(-2px); }
+
+  /* ── FOOTER ─────────────────────────────── */
+  footer {
+    background:var(--navy); color:rgba(255,255,255,0.7);
+    padding:60px 5% 30px;
+  }
+  .footer-grid {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px; margin-bottom:48px;
+  }
+  .footer-brand p { font-size:13px; line-height:1.7; margin-top:14px; max-width:260px; }
+  .footer-col h5 { font-size:13px; font-weight:600; color:#fff; margin-bottom:16px; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:10px; }
+  .footer-col ul li a { font-size:13px; color:rgba(255,255,255,0.55); text-decoration:none; transition:color .2s; }
+  .footer-col ul li a:hover { color:var(--teal-light); }
+  .footer-bottom {
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:24px; display:flex;
+    justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  .footer-bottom p { font-size:12px; }
+  .footer-domain { font-size:13px; color:var(--teal-light); font-weight:500; }
+
+  /* ── IMAGES via Unsplash ─────────────────── */
+  .hero-bg-img {
+    position:absolute; inset:0; z-index:0;
+    opacity:0.08;
+    background-image:url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1400&q=80');
+    background-size:cover; background-position:center;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media(max-width:860px){
+    .hero-content { grid-template-columns:1fr; }
+    .hero-visual { grid-template-columns:1fr 1fr; }
+    .why-grid { grid-template-columns:1fr; }
+    .contact-grid { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+    .nav-links { display:none; }
+    .form-row { grid-template-columns:1fr; }
+  }
+  @media(max-width:520px){
+    .hero-visual { grid-template-columns:1fr 1fr; }
+    .footer-grid { grid-template-columns:1fr; }
+  }
+
+  /* ── SCROLL REVEAL ──────────────────────── */
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s, transform .6s; }
+  .reveal.visible { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">CYG</div>
+    <span class="logo-text">CYG<span>Service</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#promociones">Promociones</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto" class="nav-cta">Contáctanos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-img"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge"><span></span> Especialistas para PYMEs en Chile</div>
+      <h1>Tu empresa más <em>ordenada,</em> más rentable</h1>
+      <p>Desde la creación de tu empresa hasta la gestión diaria: contabilidad, payroll, asesoría tributaria y consultoría administrativa, todo en un solo lugar.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-primary">Solicitar asesoría gratis →</a>
+        <a href="#servicios" class="btn-outline">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stat-card featured">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-num">+500 <span>empresas</span></div>
+        <div class="stat-label">asesoradas en todo Chile</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">clientes satisfechos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-num">24<span>h</span></div>
+        <div class="stat-label">tiempo de respuesta</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">¿Qué hacemos?</span>
+      <h2 class="section-title">Servicios diseñados<br>para tu negocio</h2>
+      <p class="section-subtitle">Soluciones integrales adaptadas a las necesidades reales de las pequeñas y medianas empresas chilenas.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🏢</div>
+        <h3>Creación de Empresas</h3>
+        <p>Constituimos tu empresa de forma rápida y sin complicaciones. SpA, SRL, SA — te asesoramos en la mejor estructura legal y tributaria desde el día uno.</p>
+        <span class="service-tag">Desde $49.900</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📒</div>
+        <h3>Contabilidad</h3>
+        <p>Llevamos tu contabilidad al día, cumpliendo con todas las obligaciones del SII. Balances, declaraciones y reportes mensuales claros y a tiempo.</p>
+        <span class="service-tag">Planes mensuales</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">👩‍💼</div>
+        <h3>Administración de Empresas</h3>
+        <p>Te ayudamos a ordenar los procesos internos, gestionar proveedores, controlar costos y tomar mejores decisiones con información real.</p>
+        <span class="service-tag">Consultoría continua</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💼</div>
+        <h3>Payroll / Remuneraciones</h3>
+        <p>Calculamos y procesamos las remuneraciones de tu equipo correctamente: liquidaciones, cotizaciones previsionales, AFP, isapres y más.</p>
+        <span class="service-tag">100% correcto y a tiempo</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📋</div>
+        <h3>Asesoría Tributaria</h3>
+        <p>Optimizamos tu carga tributaria dentro del marco legal. Declaraciones de renta, IVA, operación renta y planificación fiscal para que pagues lo justo.</p>
+        <span class="service-tag">Ahorra en impuestos</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🤝</div>
+        <h3>Consultoría Estratégica</h3>
+        <p>Diagnóstico, planificación y acompañamiento para que tu empresa crezca de manera sostenida. Ideal para emprendedores que quieren dar el salto.</p>
+        <span class="service-tag">A medida</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMOCIONES -->
+<section id="promociones">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Planes especiales PYMEs</span>
+      <h2 class="section-title">Precios claros,<br>sin sorpresas</h2>
+      <p class="section-subtitle">Planes pensados para pequeñas y medianas empresas que quieren profesionalizar su gestión sin gastar de más.</p>
+    </div>
+    <div class="promo-grid">
+      <div class="promo-card starter reveal">
+        <span class="promo-badge">Emprendedor</span>
+        <div class="promo-name">Pack Inicio</div>
+        <div class="promo-price">$89.900</div>
+        <div class="promo-period">/ mes + IVA</div>
+        <ul class="promo-features">
+          <li>Contabilidad básica mensual</li>
+          <li>Declaración de IVA (F29)</li>
+          <li>Hasta 5 trabajadores en payroll</li>
+          <li>Soporte por WhatsApp</li>
+          <li>Creación de empresa incluida (1er mes)</li>
+        </ul>
+        <a href="#contacto" class="promo-cta">Comenzar ahora</a>
+      </div>
+      <div class="promo-card popular reveal">
+        <div class="deco"></div>
+        <span class="promo-badge">⭐ Más popular</span>
+        <div class="promo-name">Pack PYME</div>
+        <div class="promo-price">$169.900</div>
+        <div class="promo-period">/ mes + IVA</div>
+        <ul class="promo-features">
+          <li>Contabilidad completa</li>
+          <li>IVA + Renta anual incluida</li>
+          <li>Hasta 15 trabajadores en payroll</li>
+          <li>Asesoría tributaria mensual</li>
+          <li>Administración y control de gastos</li>
+          <li>Soporte preferente 24h</li>
+        </ul>
+        <a href="#contacto" class="promo-cta">Quiero este plan</a>
+      </div>
+      <div class="promo-card premium reveal">
+        <span class="promo-badge">Empresa en crecimiento</span>
+        <div class="promo-name">Pack Empresarial</div>
+        <div class="promo-price">$299.900</div>
+        <div class="promo-period">/ mes + IVA</div>
+        <ul class="promo-features">
+          <li>Todo lo del Pack PYME</li>
+          <li>Trabajadores ilimitados en payroll</li>
+          <li>Consultoría estratégica mensual</li>
+          <li>Planificación tributaria avanzada</li>
+          <li>Reportes gerenciales mensuales</li>
+          <li>Ejecutivo dedicado</li>
+        </ul>
+        <a href="#contacto" class="promo-cta">Hablar con un asesor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ NOSOTROS -->
+<section id="nosotros">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-img reveal">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=700&q=80" alt="Equipo de consultores CYG Service" loading="lazy"/>
+        <div class="why-img-overlay">
+          <div>
+            <div class="ov-num">+10</div>
+          </div>
+          <div class="ov-text">años acompañando empresas chilenas en su crecimiento</div>
+        </div>
+      </div>
+      <div>
+        <div class="reveal">
+          <span class="section-tag">¿Por qué elegirnos?</span>
+          <h2 class="section-title">Un equipo que habla<br>tu mismo idioma</h2>
+          <p class="section-subtitle" style="margin-bottom:28px;">Sabemos lo que significa manejar una empresa en Chile: las exigencias del SII, los costos laborales y la presión diaria. Por eso somos más que asesores, somos tu equipo.</p>
+        </div>
+        <div class="why-items">
+          <div class="why-item reveal">
+            <div class="why-item-icon">🎯</div>
+            <div>
+              <h4>Especialistas en PYMEs chilenas</h4>
+              <p>No somos una empresa genérica. Nos enfocamos exclusivamente en la realidad de las pequeñas y medianas empresas en Chile.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-item-icon">🔒</div>
+            <div>
+              <h4>Cumplimiento garantizado con el SII</h4>
+              <p>Tu empresa siempre al día. Manejamos todas tus obligaciones tributarias y laborales para que no tengas sorpresas.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-item-icon">📱</div>
+            <div>
+              <h4>Atención cercana y rápida</h4>
+              <p>Respondemos en menos de 24 horas. Tienes acceso directo a tu asesor vía WhatsApp, correo o videollamada.</p>
+            </div>
+          </div>
+          <div class="why-item reveal">
+            <div class="why-item-icon">💰</div>
+            <div>
+              <h4>Precios transparentes para PYMEs</h4>
+              <p>Sin cobros ocultos ni sorpresas a fin de mes. Sabes exactamente lo que pagas y lo que recibes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <span class="section-tag" style="color:var(--teal-light)">Lo que dicen nuestros clientes</span>
+      <h2 class="section-title" style="color:#fff">Empresas reales,<br>resultados reales</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Gracias a CYG Service pudimos ordenar nuestra contabilidad desde cero. Antes vivíamos con miedo al SII, ahora estamos completamente al día."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#1a3a5c;color:#7ec8e3">MR</div>
+          <div>
+            <div class="test-name">María Rodríguez</div>
+            <div class="test-role">Dueña, Boutique MR – Santiago</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Contratamos el pack PYME y en 3 meses ya teníamos los procesos de payroll funcionando solos. El equipo es súper profesional y siempre disponible."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#0a3d35;color:#5edbc4">CF</div>
+          <div>
+            <div class="test-name">Carlos Fuentes</div>
+            <div class="test-role">Gerente, Construcciones CF – Valparaíso</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Crearon mi SpA en una semana y me explicaron todo en un lenguaje sencillo. Ideal para emprendedores que recién parten. Los recomiendo al 100%."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#3d1a0a;color:#fbaa5e">AM</div>
+          <div>
+            <div class="test-name">Andrés Morales</div>
+            <div class="test-role">Fundador, TechStart AM – Concepción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="section-tag">Hablemos</span>
+        <h2 class="section-title">¿Listo para ordenar<br>tu empresa?</h2>
+        <p class="contact-info">La primera asesoría es completamente gratis. Cuéntanos en qué etapa está tu empresa y te diremos exactamente cómo podemos ayudarte.</p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <h5>Ubicación</h5>
+            <p>Santiago, Chile · Atención remota a todo el país</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🌐</div>
+          <div>
+            <h5>Sitio web</h5>
+            <p>www.cygservice.com</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📱</div>
+          <div>
+            <h5>WhatsApp</h5>
+            <p>+56 9 XXXX XXXX</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div>
+            <h5>Correo</h5>
+            <p>contacto@cygservice.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h3 style="font-family:'Lora',serif;font-size:1.2rem;color:var(--navy);margin-bottom:22px;">Solicita tu asesoría gratuita</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre"/>
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" placeholder="Nombre de tu empresa"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@empresa.cl"/>
+        </div>
+        <div class="form-group">
+          <label>¿Qué servicio te interesa?</label>
+          <select>
+            <option value="">Selecciona un servicio...</option>
+            <option>Creación de empresa</option>
+            <option>Contabilidad</option>
+            <option>Payroll / Remuneraciones</option>
+            <option>Asesoría tributaria</option>
+            <option>Administración de empresa</option>
+            <option>Consultoría estratégica</option>
+            <option>Pack completo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cuéntanos más (opcional)</label>
+          <textarea placeholder="¿En qué etapa está tu empresa? ¿Qué problema quieres resolver?"></textarea>
+        </div>
+        <button class="form-submit">Enviar solicitud gratis →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="text-decoration:none;display:flex;align-items:center;gap:10px;">
+          <div class="logo-icon">CYG</div>
+          <span style="font-size:18px;font-weight:700;color:#fff;">CYG<span style="color:var(--teal-light)">Service</span></span>
+        </div>
+        <p>Tu aliado en consultoría, contabilidad y administración empresarial. Apoyamos a las PYMEs chilenas a crecer con orden y confianza.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Servicios</h5>
+        <ul>
+          <li><a href="#servicios">Creación de empresas</a></li>
+          <li><a href="#servicios">Contabilidad</a></li>
+          <li><a href="#servicios">Payroll</a></li>
+          <li><a href="#servicios">Asesoría tributaria</a></li>
+          <li><a href="#servicios">Consultoría</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#promociones">Planes y precios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="mailto:contacto@cygservice.com">contacto@cygservice.com</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">Santiago, Chile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 CYG Service · Todos los derechos reservados</p>
+      <span class="footer-domain">www.cygservice.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  document.querySelector('.form-submit').addEventListener('click',()=>{
+    alert('¡Gracias! Tu solicitud fue enviada. Te contactaremos pronto.');
+  });
+</script>
+</body>
+</html>
